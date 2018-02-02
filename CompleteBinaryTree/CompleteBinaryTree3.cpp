@@ -339,8 +339,10 @@ void CmpBinTree<T>::TournamentIterate(int index)
 		return;
 	}
 
-	TournamentIterate(leftIndex);
-	TournamentIterate(rightIndex);
+	if(leftIndex < nodesCount)
+		TournamentIterate(leftIndex);
+	if(rightIndex < nodesCount)
+		TournamentIterate(rightIndex);
 }
 
 template <typename T>

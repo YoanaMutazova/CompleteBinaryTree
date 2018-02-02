@@ -51,7 +51,7 @@ private:
 			rightAddressArray[i] = -1;
 		}
 		capacity *= 2;
-		delete[] tempRight;
+		delete[] tempRoot;
 		delete[] tempLeft;
 		delete[] tempRight;
 	}
@@ -182,20 +182,15 @@ public:
 		for (int i = 0; i <= rand() % 10; i++)
 			random_shuffle(Leaves.begin(), Leaves.end());
 
-		int numOfCompetitors = NumberOfElements();
-		int numPlaceholders = 0;
+		int numOfCompetitors = Leaves.size();
+		int numPlaceholders = 1;
 
-		while (numOfCompetitors > 1)
+		while (numPlaceholders < numOfCompetitors)
 		{
-			if (numOfCompetitors % 2 == 0)
-				numOfCompetitors /= 2;
-			else
-			{
-				numOfCompetitors++;
-				numOfCompetitors /= 2;
-			}
-			numPlaceholders += numOfCompetitors;
+			numPlaceholders *= 2;
 		}
+
+		numPlaceholders /= 2;
 
 		string placeholder = "ToBeDetermined 0";
 		for (int i = 0; i < numPlaceholders; i++)
@@ -304,10 +299,13 @@ public:
 
 	void AllBattles()
 	{
-		for (int i = 0; i < winners.size(); i++) 
+		for (int i = 0; i < winners.size(); i++)
 		{
-			cout << "Match #" << (i + 1) << " " << winners[i] << " vs. " << losers[i] << endl;
-			cout << "The winner is " << winners[i] << "!\n";
+			if (winners[i] != losers[i] && winners[i] != "ToBeDetermined 0" && losers[i] != "ToBeDetermined 0")
+			{
+				cout << "Match #" << (i + 1) << " " << winners[i] << " vs. " << losers[i] << endl;
+				cout << "The winner is " << winners[i] << "!\n\n";
+			}
 		}
 	}
 

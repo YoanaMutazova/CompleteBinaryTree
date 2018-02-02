@@ -273,9 +273,9 @@ public:
 
 	void TournamentIterate(node<T>*& n)
 	{
-		if (n->left->inf != T())
+		if (n->left && n->left->inf != T())
 		{
-			if (n->right)
+			if (n->right && n->right->inf != T())
 			{
 				node<T>* winner;
 				winner = DetermineWinner(n->left, n->right);
@@ -290,8 +290,10 @@ public:
 			return;
 		}
 
-		TournamentIterate(n->left);
-		TournamentIterate(n->right);
+		if(n->left)
+			TournamentIterate(n->left);
+		if(n->right)
+			TournamentIterate(n->right);
 	}
 
 	node<T>* DetermineWinner(node<T>* const& part1, node<T>* const& part2)
